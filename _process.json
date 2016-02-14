@@ -1,0 +1,15 @@
+{
+  "cwd": "/Users/ssohjiro/runningServer/proxy-server",
+  "script": "/Users/ssohjiro/runningServer/proxy-server/index.js",
+  "name": "proxy-serverPRD",
+  "log_date_format": "YYYY-MM-DD HH:mm Z",
+  "min_uptime": "10s",
+  "max_restarts": 3,
+  "error_file": "/Users/ssohjiro/.pm2/logs/proxy-serverPRD.log",
+  "out_file": "/Users/ssohjiro/.pm2/logs/proxy-serverPRD.log",
+  "merge_logs": true,
+  "env": {
+    "PORT": 3080,
+    "NODE_ENV": "production"
+  }
+}

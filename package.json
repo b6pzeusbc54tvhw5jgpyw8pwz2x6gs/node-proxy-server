@@ -1,0 +1,19 @@
+{
+  "name": "proxy-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./pm2Starter.js --start --prd",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alfred UC <b6pzeusbc54tvhw5jgpyw8pwz2x6gs@gmail.com> (https://github.com/b6pzeusbc54tvhw5jgpyw8pwz2x6gs)",
+  "license": "ISC",
+  "dependencies": {
+    "graceful-readlink": "^1.0.1",
+    "http-proxy": "^1.13.1",
+    "sync-exec": "^0.6.2",
+    "underscore": "^1.8.3",
+    "yargs": "^3.32.0"
+  }
+}
