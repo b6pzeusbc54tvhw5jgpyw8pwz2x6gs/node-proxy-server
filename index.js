@@ -3,24 +3,33 @@ const http = require('http');
 const httpProxy = require('http-proxy');
 
 const proxy = httpProxy.createProxyServer({});
-const port = process.env.PORT;
+var httpPort = process.env.HTTP_PORT;
+var httpsPort = process.env.HTTPS_PORT;
 
 const domainInfo = require('./domainInfo.json');
 const mappingList = domainInfo.mappingList;
 
-const server = http.createServer( function( req, res ) {
+var proxyService = function( req, res ) {
 
-  const mapInfo = _.findWhere( mappingList, { host: req.headers.host });
-
+  var mapInfo = _.findWhere( mapInfoList, { host: req.headers.host });
   if( ! mapInfo ) {
     return;
   }
-
   proxy.web( req, res, { target: mapInfo.target });
-});
+}
 
-server.listen( port );
+const httpsOptions = {
+	key: fs.readFileSync('./ssl/host.key'),
+	cert: fs.readFileSync('./ssl/host.crt'),
+	ca: fs.readFileSync('./ssl/rootCA.crt')
+};
+
+var httpServer = http.createServer( proxyService );
+var httpsServer = https.createServer( proxyService );
+httpServer.listen( httpPort );
+httpsServer.listen( httpsOptions, httpsPort );
 
 console.log('mappingList: ')
 console.log( JSON.stringify( mappingList, null, 2) );
-console.log('proxy-server now listen to port: ' + port );
+console.log('proxy-server now listen to port: ' + httpPort );
+console.log('proxy-httpsServer now listen to port: ' + httpsPort );
