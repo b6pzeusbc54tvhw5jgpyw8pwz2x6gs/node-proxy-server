@@ -1,18 +1,18 @@
-var _ = require('underscore');
-var http = require('http');
-var httpProxy = require('http-proxy');
+const _ = require('underscore');
+const http = require('http');
+const httpProxy = require('http-proxy');
 
-var proxy = httpProxy.createProxyServer({});
-var port = process.env.PORT;
+const proxy = httpProxy.createProxyServer({});
+const port = process.env.PORT;
 
-var mapInfoList = [
+const mapInfoList = [
   { host: 'localhost', target: 'http://localhost:3081' },
   { host: 'pc.localhost', target: 'http://localhost:3015' }
 ];
 
-var server = http.createServer( function( req, res ) {
+const server = http.createServer( function( req, res ) {
 
-  var mapInfo = _.findWhere( mapInfoList, { host: req.headers.host });
+  const mapInfo = _.findWhere( mapInfoList, { host: req.headers.host });
 
   if( ! mapInfo ) {
     return;
